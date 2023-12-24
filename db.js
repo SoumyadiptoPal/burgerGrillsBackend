@@ -1,11 +1,23 @@
+require('dotenv').config()
 const mongoose=require('mongoose');
 mongoose.set('strictQuery', false);
-const server='127.0.0.1:27017';
+const uri= process.env.DATABASE_URL;
 const database='BurgerWeb';
 const connectDB=async()=>{
     try{
-        await mongoose.connect(`mongodb://${server}/${database}`);
-        console.log("MongoDB connected");
+        const connectionParams={
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        };
+
+        mongoose
+        .connect(uri,connectionParams)
+        .then(()=>{
+            console.log("Connected to Database")
+        })
+        .catch((e)=>{
+            console.log("Error: ", e);
+        })
     }catch(err){
         console.log("Failed to connect",err);
     }
