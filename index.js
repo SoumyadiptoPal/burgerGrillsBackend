@@ -17,9 +17,12 @@ app.use('/api/carts', require('./routes/cart'))
 app.use('/api/order', require('./routes/order'))
 app.use('/api/kitchen', require('./routes/kitchen'))
 
+app.get('/', (req, res) => {
+  res.json(`hello World`);
+});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
 
-export default app;
+module.exports=app
